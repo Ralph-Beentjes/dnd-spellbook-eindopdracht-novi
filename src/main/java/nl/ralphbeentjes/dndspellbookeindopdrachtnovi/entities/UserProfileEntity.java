@@ -1,9 +1,6 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.enums.Role;
 
 import java.util.List;
@@ -11,11 +8,13 @@ import java.util.List;
 @Entity
 @Table(name = "user_profiles")
 public class UserProfileEntity extends BaseEntity {
+    @Column(length = 100)
     private String username;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "user-profile")
     private List<SpellbookEntity> spellbooks;
 
     public String getUsername() {

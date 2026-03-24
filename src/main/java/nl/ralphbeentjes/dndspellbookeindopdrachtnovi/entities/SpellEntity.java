@@ -1,9 +1,6 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.enums.CastingTime;
 
 import java.util.List;
@@ -11,17 +8,31 @@ import java.util.List;
 @Entity
 @Table(name = "spells")
 public class SpellEntity extends BaseEntity{
+    @Column(unique = true, nullable = false)
     private String spellName;
     private int level;
+
+    @ManyToMany(mappedBy = "spells")
+    private List<SpellbookEntity> spellbooks;
+
+    @ManyToMany(mappedBy = "spells")
     private List<ClassEntity> classes;
 
     @Enumerated(EnumType.STRING)
     private CastingTime castingTime;
 
+    @Column(nullable = false)
     private int range;
+
+    @Column(nullable = false, length = 100)
     private String components;
+
+    @Column(nullable = false, length = 100)
     private String duration;
+
     private boolean concentration;
+
+    @Column(nullable = false)
     private String description;
 
     public String getSpellName() {
@@ -38,6 +49,14 @@ public class SpellEntity extends BaseEntity{
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public List<SpellbookEntity> getSpellbooks() {
+        return spellbooks;
+    }
+
+    public void setSpellbooks(List<SpellbookEntity> spellbooks) {
+        this.spellbooks = spellbooks;
     }
 
     public List<ClassEntity> getClasses() {
