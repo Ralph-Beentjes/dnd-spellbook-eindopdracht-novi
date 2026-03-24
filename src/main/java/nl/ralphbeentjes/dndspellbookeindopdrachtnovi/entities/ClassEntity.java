@@ -2,6 +2,7 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class ClassEntity extends BaseEntity {
             joinColumns = @JoinColumn (name = "class_id"),
             inverseJoinColumns = @JoinColumn (name = "spell_id")
     )
-    private Set<SpellEntity> spells;
+    private Set<SpellEntity> spells = new HashSet<>();
 
     public String getClassName() {
         return className;

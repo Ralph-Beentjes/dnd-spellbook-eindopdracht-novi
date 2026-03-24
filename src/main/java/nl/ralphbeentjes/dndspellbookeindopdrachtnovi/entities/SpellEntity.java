@@ -3,6 +3,7 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 import jakarta.persistence.*;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.enums.CastingTime;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,10 +15,10 @@ public class SpellEntity extends BaseEntity{
     private int level;
 
     @ManyToMany(mappedBy = "spells", fetch = FetchType.LAZY)
-    private Set<SpellbookEntity> spellbooks;
+    private Set<SpellbookEntity> spellbooks = new HashSet<>();
 
     @ManyToMany(mappedBy = "spells", fetch = FetchType.LAZY)
-    private Set<ClassEntity> characterClasses;
+    private Set<ClassEntity> characterClasses = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     private CastingTime castingTime;
