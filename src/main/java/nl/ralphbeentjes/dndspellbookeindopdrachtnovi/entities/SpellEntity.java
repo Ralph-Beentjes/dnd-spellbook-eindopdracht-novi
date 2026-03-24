@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.enums.CastingTime;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "spells")
@@ -12,11 +13,11 @@ public class SpellEntity extends BaseEntity{
     private String spellName;
     private int level;
 
-    @ManyToMany(mappedBy = "spells")
-    private List<SpellbookEntity> spellbooks;
+    @ManyToMany(mappedBy = "spells", fetch = FetchType.LAZY)
+    private Set<SpellbookEntity> spellbooks;
 
-    @ManyToMany(mappedBy = "spells")
-    private List<ClassEntity> classes;
+    @ManyToMany(mappedBy = "spells", fetch = FetchType.LAZY)
+    private Set<ClassEntity> characterClasses;
 
     @Enumerated(EnumType.STRING)
     private CastingTime castingTime;
@@ -32,7 +33,7 @@ public class SpellEntity extends BaseEntity{
 
     private boolean concentration;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     public String getSpellName() {
@@ -51,20 +52,20 @@ public class SpellEntity extends BaseEntity{
         this.level = level;
     }
 
-    public List<SpellbookEntity> getSpellbooks() {
+    public Set<SpellbookEntity> getSpellbooks() {
         return spellbooks;
     }
 
-    public void setSpellbooks(List<SpellbookEntity> spellbooks) {
+    public void setSpellbooks(Set<SpellbookEntity> spellbooks) {
         this.spellbooks = spellbooks;
     }
 
-    public List<ClassEntity> getClasses() {
-        return classes;
+    public Set<ClassEntity> getClasses() {
+        return characterClasses;
     }
 
-    public void setClasses(List<ClassEntity> classes) {
-        this.classes = classes;
+    public void setClasses(Set<ClassEntity> classes) {
+        this.characterClasses = classes;
     }
 
     public CastingTime getCastingTime() {

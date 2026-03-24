@@ -3,11 +3,12 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "spellbooks")
 public class SpellbookEntity extends BaseEntity {
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user-id")
     private UserProfileEntity user;
 
@@ -16,19 +17,19 @@ public class SpellbookEntity extends BaseEntity {
 
     private int level;
 
-    @ManyToOne
-    @JoinColumn(name = "class-id")
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id", nullable = false)
     private ClassEntity characterClass;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(
             name = "spellbook_spell",
-            joinColumns = @JoinColumn(name= "spellbook-id"),
-            inverseJoinColumns = @JoinColumn(name = "spell-id")
+            joinColumns = @JoinColumn(name= "spellbook_id"),
+            inverseJoinColumns = @JoinColumn(name = "spell_id")
     )
-    private List<SpellEntity> spells;
+    private Set<SpellEntity> spells;
 
-    @OneToMany(mappedBy = "spellbook")
+    @OneToMany(mappedBy = "spellbook", fetch = FetchType.LAZY)
     private List<ShareEntity> shares;
 
     public UserProfileEntity getUser() {
@@ -63,11 +64,11 @@ public class SpellbookEntity extends BaseEntity {
         this.characterClass = characterClass;
     }
 
-    public List<SpellEntity> getSpells() {
+    public Set<SpellEntity> getSpells() {
         return spells;
     }
 
-    public void setSpells(List<SpellEntity> spells) {
+    public void setSpells(Set<SpellEntity> spells) {
         this.spells = spells;
     }
 
