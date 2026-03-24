@@ -3,6 +3,7 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "classes")
@@ -13,16 +14,16 @@ public class ClassEntity extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "classes")
+    @OneToMany(mappedBy = "characterClass", fetch = FetchType.LAZY)
     private List<SpellbookEntity> spellbooks;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(
             name = "class_spell",
-            joinColumns = @JoinColumn (name = "class-id"),
-            inverseJoinColumns = @JoinColumn (name = "spell-id")
+            joinColumns = @JoinColumn (name = "class_id"),
+            inverseJoinColumns = @JoinColumn (name = "spell_id")
     )
-    private List<SpellEntity> spells;
+    private Set<SpellEntity> spells;
 
     public String getClassName() {
         return className;
@@ -48,11 +49,11 @@ public class ClassEntity extends BaseEntity {
         this.spellbooks = spellbooks;
     }
 
-    public List<SpellEntity> getSpells() {
+    public Set<SpellEntity> getSpells() {
         return spells;
     }
 
-    public void setSpells(List<SpellEntity> spells) {
+    public void setSpells(Set<SpellEntity> spells) {
         this.spells = spells;
     }
 }

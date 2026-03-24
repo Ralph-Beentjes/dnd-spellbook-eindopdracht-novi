@@ -14,7 +14,7 @@ public class UserProfileEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user-profile")
+    @OneToMany(mappedBy = "user_profile", fetch = FetchType.LAZY)
     private List<SpellbookEntity> spellbooks;
 
     public String getUsername() {
