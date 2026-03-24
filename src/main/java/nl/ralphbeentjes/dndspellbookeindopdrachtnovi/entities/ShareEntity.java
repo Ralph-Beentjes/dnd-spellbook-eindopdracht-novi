@@ -1,15 +1,19 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "shares")
 public class ShareEntity extends BaseEntity {
+    @ManyToOne
+    @JoinColumn(name = "spellbook-id")
     private SpellbookEntity spellbook;
+
+    @Column(nullable = false)
     private String createdBy;
+
     private Date createdOn;
 
     public SpellbookEntity getSpellbook() {
