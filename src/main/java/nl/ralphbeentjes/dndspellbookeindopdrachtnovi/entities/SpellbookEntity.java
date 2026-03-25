@@ -30,7 +30,7 @@ public class SpellbookEntity extends BaseEntity {
     )
     private Set<SpellEntity> spells = new HashSet<>();
 
-    @OneToMany(mappedBy = "spellbook", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "spellbook", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ShareEntity> shares;
 
     public UserProfileEntity getUser() {

@@ -15,7 +15,6 @@ public class ClassEntity extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "characterClass", fetch = FetchType.LAZY)
     private List<SpellbookEntity> spellbooks;
 
     @ManyToMany (fetch = FetchType.LAZY)
