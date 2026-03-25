@@ -1,4 +1,4 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers;
 
-public class UserProfileDTOMapper {
+public class SpellMapper {
 }

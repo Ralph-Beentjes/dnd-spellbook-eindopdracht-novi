@@ -1,4 +1,4 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers;
 
-public class ShareDTOMapper {
+public class UserProfileMapper {
 }
