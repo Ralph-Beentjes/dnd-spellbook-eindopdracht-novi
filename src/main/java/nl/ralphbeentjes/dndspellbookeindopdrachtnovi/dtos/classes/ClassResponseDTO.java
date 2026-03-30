@@ -8,21 +8,42 @@ public class ClassResponseDTO {
     private String className;
     private String description;
 
-    private List<SpellbookDTO> spellbooks;
-    private Set<SpellDTO> spells;
+    private List<Long> spellbookIds;
+    private Set<Long> spellIds;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getClassName() { return className; }
-    public void setClassName(String className) { this.className = className; }
+    public String getClassName() {
+        return className;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
-    public List<SpellbookDTO> getSpellbooks() { return spellbooks; }
-    public void setSpellbooks(List<SpellbookDTO> spellbooks) { this.spellbooks = spellbooks; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Set<SpellDTO> getSpells() { return spells; }
-    public void setSpells(Set<SpellDTO> spells) { this.spells = spells; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Long> getSpellbookIds() {
+        return spellbookIds;
+    }
+
+    public void setSpellbookIds(List<Long> spellbookIds) {
+        this.spellbookIds = spellbookIds;
+    }
+
+    public Set<Long> getSpellIds() {
+        return spellIds;
+    }
+
+    public void setSpellIds(Set<Long> spellIds) {
+        this.spellIds = spellIds;
+    }
 }
