@@ -1,6 +1,5 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks;
 
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ShareEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
@@ -14,7 +13,7 @@ public class SpellbookRequestDTO {
     private UserProfileEntity userProfile;
     private String spellbookName;
     private int level;
-    private ClassEntity classEntity;
+    private Long classId;
     private Set<SpellEntity> spells = new HashSet<>();
     private List<ShareEntity> shares = new ArrayList<>();
 
@@ -26,14 +25,6 @@ public class SpellbookRequestDTO {
         this.userProfile = userProfile;
     }
 
-    public String getSpellbookName() {
-        return spellbookName;
-    }
-
-    public void setSpellbookName(String spellbookName) {
-        this.spellbookName = spellbookName;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -42,12 +33,20 @@ public class SpellbookRequestDTO {
         this.level = level;
     }
 
-    public ClassEntity getClassEntity() {
-        return classEntity;
+    public String getSpellbookName() {
+        return spellbookName;
     }
 
-    public void setClassEntity(ClassEntity classEntity) {
-        this.classEntity = classEntity;
+    public void setSpellbookName(String spellbookName) {
+        this.spellbookName = spellbookName;
+    }
+
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
     }
 
     public Set<SpellEntity> getSpells() {
