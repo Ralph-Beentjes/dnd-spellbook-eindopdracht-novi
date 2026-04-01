@@ -1,9 +1,7 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities;
 
 import jakarta.persistence.*;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.enums.Role;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity

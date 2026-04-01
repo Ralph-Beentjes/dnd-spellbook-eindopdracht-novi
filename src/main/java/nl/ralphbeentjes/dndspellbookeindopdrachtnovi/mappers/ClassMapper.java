@@ -1,7 +1,7 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers;
 
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.ClassRequestDTO;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.ClassResponseDTO;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassRequestDTO;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
@@ -21,7 +21,7 @@ public interface ClassMapper {
     @Mapping(target = "spells", source = "spells")
     ClassEntity toEntity(ClassRequestDTO dto, List<SpellbookEntity> spellbooks, Set<SpellEntity> spells);
 
-    ClassResponseDTO toResponseDTO(ClassEntity entity);
+    ClassResponseDTO toResponseDTO(ClassEntity classEntity);
 
-    List<ClassResponseDTO> toResponseDTOList(List<ClassEntity> entities);
+    List<ClassResponseDTO> toResponseDTOList(List<ClassEntity> classEntities);
 }
