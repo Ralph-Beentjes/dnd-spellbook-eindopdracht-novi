@@ -11,7 +11,7 @@ import java.util.Set;
 public class SpellbookEntity extends BaseEntity {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user-id")
-    private UserProfileEntity user;
+    private UserProfileEntity userProfile;
 
     @Column(length = 100)
     private String spellbookName;
@@ -34,11 +34,11 @@ public class SpellbookEntity extends BaseEntity {
     private List<ShareEntity> shares;
 
     public UserProfileEntity getUser() {
-        return user;
+        return userProfile;
     }
 
     public void setUser(UserProfileEntity user) {
-        this.user = user;
+        this.userProfile = user;
     }
 
     public String getSpellbookName() {

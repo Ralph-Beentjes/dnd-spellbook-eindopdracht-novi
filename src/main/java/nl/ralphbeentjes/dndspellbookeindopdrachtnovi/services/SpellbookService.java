@@ -4,21 +4,34 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRe
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ShareRepository;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static org.apache.tomcat.util.net.openssl.OpenSSLStatus.setName;
 
 @Service
 public class SpellbookService {
+
     private final SpellbookRepository spellbookRepository;
     private final SpellbookMapper spellbookMapper;
+    private final SpellRepository spellRepository;
+    private final ShareRepository shareRepository;
 
-    public SpellbookService(SpellbookRepository spellbookRepository, SpellbookMapper spellbookMapper) {
+    public SpellbookService(
+            SpellbookRepository spellbookRepository,
+            SpellbookMapper spellbookMapper,
+            SpellRepository spellRepository,
+            ShareRepository shareRepository
+    ) {
         this.spellbookRepository = spellbookRepository;
         this.spellbookMapper = spellbookMapper;
+        this.spellRepository = spellRepository;
+        this.shareRepository = shareRepository;
     }
 
     public List<SpellbookResponseDTO> findAllSpellbooks() {
@@ -31,20 +44,36 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO createSpellbook(SpellbookRequestDTO spellbookRequestDTO) {
-        SpellbookEntity spellbookEntity = spellbookMapper.toEntity(spellbookRequestDTO);
-        spellbookEntity = spellbookRepository.save(spellbookEntity);
-        return spellbookMapper.toResponseDTO(spellbookEntity);
+
+        SpellbookEntity entity = spellbookMapper.toEntity(spellbookRequestDTO);
+
+        if (spellbookRequestDTO.getSpellIds() != null) {
+            entity.setSpells(new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds())));
+        }
+
+        if (spellbookRequestDTO.getShareIds() != null) {
+            entity.setShares(shareRepository.findAllById(spellbookRequestDTO.getShareIds()));
+        }
+
+        entity = spellbookRepository.save(entity);
+        return spellbookMapper.toResponseDTO(entity);
     }
 
     public SpellbookResponseDTO updateSpellbook(Long id, SpellbookRequestDTO spellbookRequestDTO) {
-        SpellbookEntity existingSpellbookEntity = spellbookRepository.findById(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        SpellbookEntity entity = spellbookRepository.findById(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        entity.setSpellbookName(spellbookRequestDTO.getSpellbookName());
+        entity.setLevel(spellbookRequestDTO.getLevel());
 
-        existingSpellbookEntity.setSpellbookName(spellbookRequestDTO.getSpellbookName());
-        existingSpellbookEntity.setLevel(spellbookRequestDTO.getLevel());
-        existingSpellbookEntity.setSpells(spellbookRequestDTO.getSpells());
+        if (spellbookRequestDTO.getSpellIds() != null) {
+            entity.setSpells(new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds())));
+        }
 
-        existingSpellbookEntity = spellbookRepository.save(existingSpellbookEntity);
-        return spellbookMapper.toResponseDTO(existingSpellbookEntity);
+        if (spellbookRequestDTO.getShareIds() != null) {
+            entity.setShares(shareRepository.findAllById(spellbookRequestDTO.getShareIds()));
+        }
+
+        entity = spellbookRepository.save(entity);
+        return spellbookMapper.toResponseDTO(entity);
     }
 
     public void deleteSpellbook(Long id) {

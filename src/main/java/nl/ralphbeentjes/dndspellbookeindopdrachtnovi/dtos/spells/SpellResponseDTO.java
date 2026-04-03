@@ -1,16 +1,18 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spells;
 
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassResponseDTO;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.enums.CastingTime;
 
+import java.util.List;
 import java.util.Set;
 
 public class SpellResponseDTO {
     private Long id;
     private String spellName;
     private int level;
-    private Set<Long> spellbookIds;
-    private Set<ClassResponseDTO> spellClasses;
+    private List<SpellbookResponseDTO> spellbooks;
+    private List<ClassResponseDTO> classes;
     private CastingTime castingTime;
     private int range;
     private String components;
@@ -20,6 +22,10 @@ public class SpellResponseDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSpellName() {
@@ -38,20 +44,20 @@ public class SpellResponseDTO {
         this.level = level;
     }
 
-    public Set<Long> getSpellbookIds() {
-        return spellbookIds;
+    public List<SpellbookResponseDTO> getSpellbooks() {
+        return spellbooks;
     }
 
-    public void setSpellbookIds(Set<Long> spellbookIds) {
-        this.spellbookIds = spellbookIds;
+    public void setSpellbooks(List<SpellbookResponseDTO> spellbooks) {
+        this.spellbooks = spellbooks;
     }
 
-    public Set<ClassResponseDTO> getSpellClasses() {
-        return spellClasses;
+    public List<ClassResponseDTO> getClasses() {
+        return classes;
     }
 
-    public void setSpellClasses(Set<ClassResponseDTO> spellClasses) {
-        this.spellClasses = spellClasses;
+    public void setClasses(List<ClassResponseDTO> classes) {
+        this.classes = classes;
     }
 
     public CastingTime getCastingTime() {

@@ -10,27 +10,19 @@ import java.util.List;
 import java.util.Set;
 
 public class SpellbookRequestDTO {
-    private UserProfileEntity userProfile;
+    private Long userProfileId;
     private String spellbookName;
     private int level;
     private Long classId;
-    private Set<SpellEntity> spells = new HashSet<>();
-    private List<ShareEntity> shares = new ArrayList<>();
+    private Set<Long> spellIds;
+    private List<Long> shareIds;
 
-    public UserProfileEntity getUserProfile() {
-        return userProfile;
+    public Long getUserProfileId() {
+        return userProfileId;
     }
 
-    public void setUserProfile(UserProfileEntity userProfile) {
-        this.userProfile = userProfile;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    public void setUserProfileId(Long userProfileId) {
+        this.userProfileId = userProfileId;
     }
 
     public String getSpellbookName() {
@@ -41,6 +33,14 @@ public class SpellbookRequestDTO {
         this.spellbookName = spellbookName;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public Long getClassId() {
         return classId;
     }
@@ -49,19 +49,19 @@ public class SpellbookRequestDTO {
         this.classId = classId;
     }
 
-    public Set<SpellEntity> getSpells() {
-        return spells;
+    public Set<Long> getSpellIds() {
+        return spellIds;
     }
 
-    public void setSpells(Set<SpellEntity> spells) {
-        this.spells = spells;
+    public void setSpellIds(Set<Long> spellIds) {
+        this.spellIds = spellIds;
     }
 
-    public List<ShareEntity> getShares() {
-        return shares;
+    public List<Long> getShareIds() {
+        return shareIds;
     }
 
-    public void setShares(List<ShareEntity> shares) {
-        this.shares = shares;
+    public void setShareIds(List<Long> shareIds) {
+        this.shareIds = shareIds;
     }
 }

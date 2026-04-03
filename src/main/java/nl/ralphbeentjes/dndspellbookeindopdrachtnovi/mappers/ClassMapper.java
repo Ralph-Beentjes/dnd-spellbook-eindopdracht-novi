@@ -3,8 +3,6 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -17,11 +15,11 @@ public interface ClassMapper {
 
     ClassMapper INSTANCE = Mappers.getMapper(ClassMapper.class);
 
-    @Mapping(target = "spellbooks", source = "spellbooks")
-    @Mapping(target = "spells", source = "spells")
-    ClassEntity toEntity(ClassRequestDTO dto, List<SpellbookEntity> spellbooks, Set<SpellEntity> spells);
+    @Mapping(target = "spellbooks", ignore = true)
+    @Mapping(target = "spells", ignore = true)
+    ClassEntity toEntity(ClassRequestDTO dto);
 
     ClassResponseDTO toResponseDTO(ClassEntity classEntity);
 
-    List<ClassResponseDTO> toResponseDTOList(List<ClassEntity> classEntities);
+    List<ClassResponseDTO> toResponseDTO(List<ClassEntity> classEntities);
 }
