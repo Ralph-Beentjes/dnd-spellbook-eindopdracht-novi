@@ -8,8 +8,8 @@ import java.util.List;
 public class SpellRequestDTO {
     private String spellName;
     private int level;
-    private List<Long> spellbookIds = new ArrayList<>();
-    private List<Long> classIds = new ArrayList<>();
+    private List<Long> spellbookIds;
+    private List<Long> classIds;
     private CastingTime castingTime;
     private int range;
     private String components;
