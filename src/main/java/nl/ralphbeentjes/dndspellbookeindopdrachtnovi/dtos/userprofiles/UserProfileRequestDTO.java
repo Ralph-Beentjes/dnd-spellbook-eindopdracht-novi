@@ -5,13 +5,13 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import java.util.Set;
 
 public class UserProfileRequestDTO {
-    private Set<SpellbookEntity> spellbooks;
+    private Set<Long> spellbookIds;
 
-    public Set<SpellbookEntity> getSpellbooks() {
-        return spellbooks;
+    public Set<Long> getSpellbookIds() {
+        return spellbookIds;
     }
 
-    public void setSpellbooks(Set<SpellbookEntity> spellbooks) {
-        this.spellbooks = spellbooks;
+    public void setSpellbookIds(Set<Long> spellbookIds) {
+        this.spellbookIds = spellbookIds;
     }
 }

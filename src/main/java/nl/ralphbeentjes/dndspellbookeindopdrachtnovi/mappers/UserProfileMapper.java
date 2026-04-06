@@ -1,5 +1,6 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers;
 
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.userprofiles.UserProfileRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.userprofiles.UserProfileResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
@@ -15,8 +16,8 @@ public interface UserProfileMapper {
 
     UserProfileMapper INSTANCE = Mappers.getMapper(UserProfileMapper.class);
 
-    @Mapping(target = "spellbooks", source = "spellbooks")
-    UserProfileEntity toEntity(Set<SpellbookEntity> spellbooks);
+    @Mapping(target = "spellbooks")
+    UserProfileEntity toEntity(UserProfileRequestDTO dto);
 
     UserProfileResponseDTO toResponseDTO(UserProfileEntity userProfile);
 

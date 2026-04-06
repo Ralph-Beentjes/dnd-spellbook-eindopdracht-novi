@@ -30,12 +30,12 @@ public class SpellService {
     }
 
     public List<SpellResponseDTO> findAllSpells() {
-        return spellMapper.toResponseDTO(spellRepository.findAll());
+        return spellMapper.toResponseDTOList(spellRepository.findAll());
     }
 
     public List<SpellResponseDTO> findAllSpellsWithContain(String spellName) {
         List<SpellEntity> spellEntities = spellRepository.findBySpellNameContaining(spellName);
-        return spellMapper.toResponseDTO(spellEntities);
+        return spellMapper.toResponseDTOList(spellEntities);
     }
 
     public SpellResponseDTO findSpellById(Long id) {

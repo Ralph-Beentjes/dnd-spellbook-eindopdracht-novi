@@ -2,7 +2,9 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services;
 
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ShareRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
@@ -35,7 +37,7 @@ public class SpellbookService {
     }
 
     public List<SpellbookResponseDTO> findAllSpellbooks() {
-        return spellbookMapper.toResponseDTO(spellbookRepository.findAll());
+        return spellbookMapper.toResponseDTOList(spellbookRepository.findAll());
     }
 
     public SpellbookResponseDTO findSpellbookById(Long id) {
@@ -44,8 +46,19 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO createSpellbook(SpellbookRequestDTO spellbookRequestDTO) {
-
         SpellbookEntity entity = spellbookMapper.toEntity(spellbookRequestDTO);
+
+        if (spellbookRequestDTO.getUserProfileId() != null) {
+            UserProfileEntity user = new UserProfileEntity();
+            user.setId(spellbookRequestDTO.getUserProfileId());
+            entity.setUser(user);
+        }
+
+        if (spellbookRequestDTO.getClassId() != null) {
+            ClassEntity classEntity = new ClassEntity();
+            classEntity.setId(spellbookRequestDTO.getClassId());
+            entity.setCharacterClass(classEntity);
+        }
 
         if (spellbookRequestDTO.getSpellIds() != null) {
             entity.setSpells(new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds())));
@@ -63,6 +76,12 @@ public class SpellbookService {
         SpellbookEntity entity = spellbookRepository.findById(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
         entity.setSpellbookName(spellbookRequestDTO.getSpellbookName());
         entity.setLevel(spellbookRequestDTO.getLevel());
+
+        if (spellbookRequestDTO.getClassId() != null) {
+            ClassEntity classEntity = new ClassEntity();
+            classEntity.setId(spellbookRequestDTO.getClassId());
+            entity.setCharacterClass(classEntity);
+        }
 
         if (spellbookRequestDTO.getSpellIds() != null) {
             entity.setSpells(new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds())));

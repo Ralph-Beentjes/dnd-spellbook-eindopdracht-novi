@@ -21,5 +21,5 @@ public interface ClassMapper {
 
     ClassResponseDTO toResponseDTO(ClassEntity classEntity);
 
-    List<ClassResponseDTO> toResponseDTO(List<ClassEntity> classEntities);
+    List<ClassResponseDTO> toResponseDTOList(List<ClassEntity> classEntities);
 }

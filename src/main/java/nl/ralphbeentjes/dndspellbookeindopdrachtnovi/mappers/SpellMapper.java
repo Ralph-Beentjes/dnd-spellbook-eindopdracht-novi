@@ -20,5 +20,5 @@ public interface SpellMapper {
 
     SpellResponseDTO toResponseDTO(SpellEntity entity);
 
-    List<SpellResponseDTO> toResponseDTO(List<SpellEntity> entities);
+    List<SpellResponseDTO> toResponseDTOList(List<SpellEntity> entities);
 }
