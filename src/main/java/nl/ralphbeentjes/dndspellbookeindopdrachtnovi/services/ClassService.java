@@ -30,7 +30,7 @@ public class ClassService {
     }
 
     public List<ClassResponseDTO> findAllClasses() {
-        return classMapper.toResponseDTO(classRepository.findAll());
+        return classMapper.toResponseDTOList(classRepository.findAll());
     }
 
     public ClassResponseDTO findClassById(Long id) {
