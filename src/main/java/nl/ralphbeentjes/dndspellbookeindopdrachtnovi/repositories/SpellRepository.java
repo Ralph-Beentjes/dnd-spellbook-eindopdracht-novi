@@ -11,4 +11,6 @@ public interface SpellRepository extends JpaRepository<SpellEntity, Long> {
 
     List<SpellEntity> findBySpellNameContaining(String spellName);
 
+    List<SpellEntity> findBySpellLevel(int level);
+
 }

@@ -44,7 +44,7 @@ public class ShareService {
         return shareMapper.toResponseDTO(shareEntity);
     }
 
-    public ShareResponseDTO updateShare(ShareRequestDTO shareRequestDTO) {
+    public ShareResponseDTO updateShare(Long id, ShareRequestDTO shareRequestDTO) {
         ShareEntity shareEntity = shareMapper.toEntity(shareRequestDTO);
 
         SpellbookEntity spellbook = spellbookRepository.findById(shareRequestDTO.getSpellbookId())

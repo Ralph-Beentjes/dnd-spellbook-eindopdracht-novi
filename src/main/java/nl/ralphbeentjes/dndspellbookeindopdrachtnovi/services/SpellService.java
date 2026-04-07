@@ -38,6 +38,11 @@ public class SpellService {
         return spellMapper.toResponseDTOList(spellEntities);
     }
 
+    public List<SpellResponseDTO> findAllSpellsWithSpellLevel(int level) {
+        List<SpellEntity> spellEntities = spellRepository.findBySpellLevel(level);
+        return spellMapper.toResponseDTOList(spellEntities);
+    }
+
     public SpellResponseDTO findSpellById(Long id) {
         SpellEntity spellEntity = spellRepository.findById(id).orElseThrow(()-> new RuntimeException("Spell not found"));
         return spellMapper.toResponseDTO(spellEntity);
