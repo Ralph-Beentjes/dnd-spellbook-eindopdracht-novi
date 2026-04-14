@@ -7,6 +7,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.UserProfileMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.UserProfileRepository;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -23,6 +24,19 @@ public class UserProfileService {
         this.userProfileRepository = userProfileRepository;
         this.userProfileMapper = userProfileMapper;
         this.spellbookRepository = spellbookRepository;
+    }
+
+    public UserProfileEntity resolveCurrentUser(Jwt jwt) {
+        String keycloakId = jwt.getSubject();
+        String username   = jwt.getClaimAsString("preferred_username");
+
+        return userProfileRepository.findByKeycloakId(keycloakId)
+                .orElseGet(() -> {
+                    UserProfileEntity newProfile = new UserProfileEntity();
+                    newProfile.setKeycloakId(keycloakId);
+                    newProfile.setUsername(username);
+                    return userProfileRepository.save(newProfile);
+                });
     }
 
     public List<UserProfileResponseDTO> findAllUserProfiles() {
