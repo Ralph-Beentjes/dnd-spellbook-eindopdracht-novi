@@ -2,10 +2,13 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.controllers;
 
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.userprofiles.UserProfileRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.userprofiles.UserProfileResponseDTO;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,13 +36,18 @@ public class UserProfileController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<UserProfileResponseDTO> createUserProfile(@RequestBody UserProfileRequestDTO userProfileRequestDTO){
-        UserProfileResponseDTO userProfileResponseDTO = userProfileService.createUserProfile(userProfileRequestDTO);
+    @PostMapping("/me")
+    public ResponseEntity<UserProfileResponseDTO> resolveMyProfile(@AuthenticationPrincipal Jwt jwt) {
+        UserProfileEntity profile = userProfileService.resolveCurrentUser(jwt);
+        UserProfileResponseDTO dto = userProfileService.findUserProfileById(profile.getId());
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userProfileResponseDTO.getId()).toUri();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/users/{id}")
+                .buildAndExpand(profile.getId())
+                .toUri();
 
-        return ResponseEntity.created(location).body(userProfileResponseDTO);
+        return ResponseEntity.created(location).body(dto);
     }
 
     @PutMapping("/{id}")
@@ -49,7 +57,7 @@ public class UserProfileController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserProfileResponseDTO> deleteUserProfile(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUserProfile(@PathVariable Long id) {
         userProfileService.deleteUserProfile(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
