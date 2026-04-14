@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "spellbooks")
 public class SpellbookEntity extends BaseEntity {
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "user-id")
+    @JoinColumn(name = "user_id")
     private UserProfileEntity userProfile;
 
     @Column(length = 100)
@@ -33,12 +33,12 @@ public class SpellbookEntity extends BaseEntity {
     @OneToMany(mappedBy = "spellbook", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ShareEntity> shares;
 
-    public UserProfileEntity getUser() {
+    public UserProfileEntity getUserProfile() {
         return userProfile;
     }
 
-    public void setUser(UserProfileEntity user) {
-        this.userProfile = user;
+    public void setUserProfile(UserProfileEntity userProfile) {
+        this.userProfile = userProfile;
     }
 
     public String getSpellbookName() {

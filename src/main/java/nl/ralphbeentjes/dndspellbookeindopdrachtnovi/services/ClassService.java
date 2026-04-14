@@ -8,7 +8,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.ClassMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ClassRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.ClassMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -20,13 +20,11 @@ public class ClassService {
     private final ClassRepository classRepository;
     private final ClassMapper classMapper;
     private final SpellRepository spellRepository;
-    private final SpellbookRepository spellbookRepository;
 
-    public ClassService(ClassRepository classRepository, ClassMapper classMapper, SpellRepository spellRepository, SpellbookRepository spellbookRepository) {
+    public ClassService(ClassRepository classRepository, ClassMapper classMapper, SpellRepository spellRepository) {
         this.classRepository = classRepository;
         this.classMapper = classMapper;
         this.spellRepository = spellRepository;
-        this.spellbookRepository = spellbookRepository;
     }
 
     public List<ClassResponseDTO> findAllClasses() {
@@ -40,12 +38,6 @@ public class ClassService {
 
     public ClassResponseDTO createClass(ClassRequestDTO classRequestDTO) {
         ClassEntity classEntity = classMapper.toEntity(classRequestDTO);
-
-        if (classRequestDTO.getSpellbookIds() != null) {
-            Set<SpellbookEntity> spellbooks =
-                    new HashSet<>(spellbookRepository.findAllById(classRequestDTO.getSpellbookIds()));
-            classEntity.setSpellbooks(spellbooks);
-        }
 
         if (classRequestDTO.getSpellIds() != null) {
             Set<SpellEntity> spells =
@@ -62,12 +54,6 @@ public class ClassService {
 
         classEntity.setClassName(classRequestDTO.getClassName());
         classEntity.setDescription(classRequestDTO.getDescription());
-
-        if (classRequestDTO.getSpellbookIds() != null) {
-            Set<SpellbookEntity> spellbooks =
-                    new HashSet<>(spellbookRepository.findAllById(classRequestDTO.getSpellbookIds()));
-            classEntity.setSpellbooks(spellbooks);
-        }
 
         if (classRequestDTO.getSpellIds() != null) {
             Set<SpellEntity> spells =

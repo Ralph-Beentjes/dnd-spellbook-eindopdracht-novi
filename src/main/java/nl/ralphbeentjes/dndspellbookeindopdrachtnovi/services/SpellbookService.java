@@ -51,7 +51,7 @@ public class SpellbookService {
         if (spellbookRequestDTO.getUserProfileId() != null) {
             UserProfileEntity user = new UserProfileEntity();
             user.setId(spellbookRequestDTO.getUserProfileId());
-            entity.setUser(user);
+            entity.setUserProfile(user);
         }
 
         if (spellbookRequestDTO.getClassId() != null) {

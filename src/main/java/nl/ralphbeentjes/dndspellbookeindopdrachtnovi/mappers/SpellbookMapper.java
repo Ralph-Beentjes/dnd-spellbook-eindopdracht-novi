@@ -9,10 +9,8 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = {ClassMapper.class, UserProfileMapper.class})
+@Mapper(componentModel = "spring", uses = {ClassMapper.class})
 public interface SpellbookMapper {
-
-    SpellbookMapper INSTANCE = Mappers.getMapper(SpellbookMapper.class);
 
     @Mapping(target = "characterClass", ignore = true)
     @Mapping(target = "userProfile", ignore = true)

@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = {SpellbookMapper.class, ClassMapper.class})
+@Mapper(componentModel = "spring", uses = {SpellbookMapper.class, ClassMapper.class})
 public interface SpellMapper {
 
     SpellMapper INSTANCE = Mappers.getMapper(SpellMapper.class);

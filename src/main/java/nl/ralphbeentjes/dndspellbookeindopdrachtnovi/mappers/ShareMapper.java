@@ -10,12 +10,12 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(uses = {SpellbookMapper.class})
+@Mapper(componentModel = "spring", uses = {SpellbookMapper.class})
 public interface ShareMapper {
 
     ShareMapper INSTANCE = Mappers.getMapper(ShareMapper.class);
 
-    @Mapping(target = "spellbooks")
+    @Mapping(target = "spellbook", ignore = true)
     ShareEntity toEntity(ShareRequestDTO dto);
 
     ShareResponseDTO toResponseDTO(ShareEntity share);

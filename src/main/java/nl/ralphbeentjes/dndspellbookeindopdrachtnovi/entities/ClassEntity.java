@@ -15,8 +15,6 @@ public class ClassEntity extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    private Set<SpellbookEntity> spellbooks;
-
     @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(
             name = "class_spell",
@@ -39,14 +37,6 @@ public class ClassEntity extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<SpellbookEntity> getSpellbooks() {
-        return spellbooks;
-    }
-
-    public void setSpellbooks(Set<SpellbookEntity> spellbooks) {
-        this.spellbooks = spellbooks;
     }
 
     public Set<SpellEntity> getSpells() {

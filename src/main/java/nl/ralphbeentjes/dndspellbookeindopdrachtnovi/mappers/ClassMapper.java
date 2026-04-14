@@ -10,12 +10,11 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 import java.util.Set;
 
-@Mapper(uses = {SpellMapper.class, SpellbookMapper.class})
+@Mapper(componentModel = "spring", uses = {SpellMapper.class, SpellbookMapper.class})
 public interface ClassMapper {
 
     ClassMapper INSTANCE = Mappers.getMapper(ClassMapper.class);
 
-    @Mapping(target = "spellbooks", ignore = true)
     @Mapping(target = "spells", ignore = true)
     ClassEntity toEntity(ClassRequestDTO dto);
 

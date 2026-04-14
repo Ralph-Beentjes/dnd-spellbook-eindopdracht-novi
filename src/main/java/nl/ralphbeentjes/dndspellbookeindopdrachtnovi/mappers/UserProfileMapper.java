@@ -11,12 +11,11 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 import java.util.Set;
 
-@Mapper(uses = {SpellbookMapper.class})
+@Mapper(componentModel = "spring")
 public interface UserProfileMapper {
 
-    UserProfileMapper INSTANCE = Mappers.getMapper(UserProfileMapper.class);
-
-    @Mapping(target = "spellbooks")
+    @Mapping(target = "spellbooks", ignore = true)
+    @Mapping(target = "keycloakId", ignore = true)
     UserProfileEntity toEntity(UserProfileRequestDTO dto);
 
     UserProfileResponseDTO toResponseDTO(UserProfileEntity userProfile);

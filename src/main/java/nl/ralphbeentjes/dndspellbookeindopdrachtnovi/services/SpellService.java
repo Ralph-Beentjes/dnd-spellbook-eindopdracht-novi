@@ -39,7 +39,7 @@ public class SpellService {
     }
 
     public List<SpellResponseDTO> findAllSpellsWithSpellLevel(int level) {
-        List<SpellEntity> spellEntities = spellRepository.findBySpellLevel(level);
+        List<SpellEntity> spellEntities = spellRepository.findByLevel(level);
         return spellMapper.toResponseDTOList(spellEntities);
     }
 

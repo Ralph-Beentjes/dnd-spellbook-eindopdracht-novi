@@ -12,7 +12,7 @@ public class UserProfileEntity extends BaseEntity {
 
     private String username;
 
-    @OneToMany(mappedBy = "user_profile", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userProfile", fetch = FetchType.LAZY)
     private Set<SpellbookEntity> spellbooks;
 
     public String getKeycloakId() {
