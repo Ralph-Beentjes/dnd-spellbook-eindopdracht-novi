@@ -12,7 +12,6 @@ import java.util.Set;
 
 public class SpellbookResponseDTO {
     private Long id;
-    private UserProfileResponseDTO userProfile;
     private String spellbookName;
     private int level;
     private ClassResponseDTO characterClass;
@@ -24,14 +23,6 @@ public class SpellbookResponseDTO {
     }
 
     public void setId(Long id) { this.id = id; }
-
-    public UserProfileResponseDTO getUserProfile() {
-        return userProfile;
-    }
-
-    public void setUserProfile(UserProfileResponseDTO userProfile) {
-        this.userProfile = userProfile;
-    }
 
     public String getSpellbookName() {
         return spellbookName;

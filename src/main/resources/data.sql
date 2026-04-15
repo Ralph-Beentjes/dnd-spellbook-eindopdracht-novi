@@ -1,10 +1,10 @@
 -- Classes
 INSERT INTO classes (id, class_name, description)
-VALUES (1, 'Wizard', 'A scholarly magic-user who casts spells through study and intelligence.')
+VALUES (2, 'Wizard', 'A scholarly magic-user who casts spells through study and intelligence.')
     ON CONFLICT DO NOTHING;
 
 INSERT INTO classes (id, class_name, description)
-VALUES (2, 'Cleric', 'A priestly champion who wields divine magic in service of a higher power.')
+VALUES (1, 'Cleric', 'A priestly champion who wields divine magic in service of a higher power.')
     ON CONFLICT DO NOTHING;
 
 -- Spells
@@ -17,5 +17,5 @@ VALUES (2, 'Cure Wounds', 1, 'ACTION', 0, 'V, S', 'Instantaneous', false, 'A cre
     ON CONFLICT DO NOTHING;
 
 -- Link spells to classes (class_spell join table)
-INSERT INTO class_spell (class_id, spell_id) VALUES (1, 1) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell (class_id, spell_id) VALUES (2, 2) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell (class_id, spell_id) VALUES (2, 1) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell (class_id, spell_id) VALUES (1, 2) ON CONFLICT DO NOTHING;
