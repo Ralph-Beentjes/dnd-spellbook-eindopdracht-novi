@@ -1,5 +1,6 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services;
 
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.AddSpellsRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
@@ -12,6 +13,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepositor
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,8 +45,8 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO findSpellbookById(Long id) {
-        SpellbookEntity spellbookEntity = spellbookRepository.findById(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
-        return spellbookMapper.toResponseDTO(spellbookEntity);
+        SpellbookEntity entity = spellbookRepository.findByIdWithClass(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        return spellbookMapper.toResponseDTO(entity);
     }
 
     public SpellbookResponseDTO createSpellbook(SpellbookRequestDTO spellbookRequestDTO) {
@@ -92,6 +94,19 @@ public class SpellbookService {
 
         if (spellbookRequestDTO.getShareIds() != null) {
             entity.setShares(shareRepository.findAllById(spellbookRequestDTO.getShareIds()));
+        }
+
+        entity = spellbookRepository.save(entity);
+        return spellbookMapper.toResponseDTO(entity);
+    }
+
+    public SpellbookResponseDTO addSpellsToSpellbook(Long id, AddSpellsRequestDTO request) {
+        SpellbookEntity entity = spellbookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+
+        if (request.getSpellIds() != null && !request.getSpellIds().isEmpty()) {
+            Set<SpellEntity> newSpells = new HashSet<>(spellRepository.findAllById(request.getSpellIds()));
+            entity.getSpells().addAll(newSpells);
         }
 
         entity = spellbookRepository.save(entity);

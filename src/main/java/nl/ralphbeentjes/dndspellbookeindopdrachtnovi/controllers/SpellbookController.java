@@ -1,5 +1,6 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.controllers;
 
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.AddSpellsRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services.SpellbookService;
@@ -45,6 +46,13 @@ public class SpellbookController {
     public ResponseEntity<SpellbookResponseDTO> updateSpellbook(@PathVariable Long id, @RequestBody SpellbookRequestDTO spellbookRequestDTO) {
         SpellbookResponseDTO spellbookResponseDTO = spellbookService.updateSpellbook(id, spellbookRequestDTO);
         return new  ResponseEntity<>(spellbookResponseDTO, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/spells")
+    public ResponseEntity<SpellbookResponseDTO> addSpellsToSpellbook(@PathVariable Long id, @RequestBody AddSpellsRequestDTO request) {
+        SpellbookResponseDTO spellbookResponseDTO = spellbookService.addSpellsToSpellbook(id, request);
+
+        return ResponseEntity.ok(spellbookResponseDTO);
     }
 
     @DeleteMapping("/{id}")
