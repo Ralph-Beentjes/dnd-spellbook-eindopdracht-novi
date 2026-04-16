@@ -32,6 +32,12 @@ public class SpellController {
         return new ResponseEntity<>(spell, HttpStatus.OK);
     }
 
+    @GetMapping("/level/{level}")
+    public ResponseEntity<List<SpellResponseDTO>> getSpellsByLevel(@PathVariable int level) {
+        List<SpellResponseDTO> spells = spellService.findAllSpellsWithSpellLevel(level);
+        return ResponseEntity.ok(spells);
+    }
+
     @PostMapping
     public ResponseEntity<SpellResponseDTO> createSpell(@RequestBody SpellRequestDTO spellRequestDTO){
         SpellResponseDTO spellResponseDTO = spellService.createSpell(spellRequestDTO);

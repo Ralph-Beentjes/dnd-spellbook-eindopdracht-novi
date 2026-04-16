@@ -3,6 +3,7 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.apache.tomcat.util.net.openssl.OpenSSLStatus.setName;
 
@@ -84,7 +86,8 @@ public class SpellbookService {
         }
 
         if (spellbookRequestDTO.getSpellIds() != null) {
-            entity.setSpells(new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds())));
+            Set<SpellEntity> newSpells = new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds()));
+            entity.getSpells().addAll(newSpells);
         }
 
         if (spellbookRequestDTO.getShareIds() != null) {
