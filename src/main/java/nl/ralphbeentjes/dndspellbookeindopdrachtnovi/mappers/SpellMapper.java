@@ -12,8 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {SpellbookMapper.class, ClassMapper.class})
 public interface SpellMapper {
 
-    SpellMapper INSTANCE = Mappers.getMapper(SpellMapper.class);
-
     @Mapping(target = "spellbooks", ignore = true)
     @Mapping(target = "classes", ignore = true)
     SpellEntity toEntity(SpellRequestDTO dto);

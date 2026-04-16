@@ -1,34 +1,34 @@
 -- Classes
-INSERT INTO classes (id, class_name, description)
-VALUES (1, 'Bard', 'An inspiring magician whose power echoes the music of creation.')
+INSERT INTO classes (class_name, description)
+VALUES ('Bard', 'An inspiring magician whose power echoes the music of creation.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (2, 'Cleric', 'A priestly champion who wields divine magic in service of a higher power.')
+INSERT INTO classes (class_name, description)
+VALUES ('Cleric', 'A priestly champion who wields divine magic in service of a higher power.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (3, 'Druid', 'A priest of the Old Faith, wielding the powers of nature and adopting animal forms.')
+INSERT INTO classes (class_name, description)
+VALUES ('Druid', 'A priest of the Old Faith, wielding the powers of nature and adopting animal forms.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (4, 'Paladin', 'A holy warrior bound to a sacred oath.')
+INSERT INTO classes (class_name, description)
+VALUES ('Paladin', 'A holy warrior bound to a sacred oath.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (5, 'Ranger', 'A master of ranged combat, one with nature.')
+INSERT INTO classes (class_name, description)
+VALUES ('Ranger', 'A master of ranged combat, one with nature.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (6, 'Sorcerer', 'A magic user who draws their power from within.')
+INSERT INTO classes (class_name, description)
+VALUES ('Sorcerer', 'A magic user who draws their power from within.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (7, 'Warlock', 'A user of magic that is pacted to a powerful entity.')
+INSERT INTO classes (class_name, description)
+VALUES ('Warlock', 'A user of magic that is pacted to a powerful entity.')
     ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO classes (id, class_name, description)
-VALUES (8, 'Wizard', 'A scholarly magic-user who casts spells through study and intelligence.')
+INSERT INTO classes (class_name, description)
+VALUES ('Wizard', 'A scholarly magic-user who casts spells through study and intelligence.')
     ON CONFLICT (id) DO NOTHING;
 
 
@@ -114,142 +114,142 @@ VALUES
 
 -- Class - Spell Links
 
--- Bard (1)
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Vicious Mockery')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Mage Hand')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Healing Word')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Dissonant Whispers')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Shatter')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Hypnotic Pattern')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Dominate Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Otto''s Irresistible Dance')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'Etherealness')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (1, (SELECT id FROM spells WHERE spell_name = 'True Polymorph')) ON CONFLICT DO NOTHING;
+-- Bard
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Vicious Mockery')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Mage Hand')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Healing Word')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Dissonant Whispers')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Shatter')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Hypnotic Pattern')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Dominate Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Otto''s Irresistible Dance')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'Etherealness')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Bard'), (SELECT id FROM spells WHERE spell_name = 'True Polymorph')) ON CONFLICT DO NOTHING;
 
--- Cleric (2)
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Sacred Flame')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Guidance')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Toll the Dead')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Cure Wounds')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Bless')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Healing Word')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Spiritual Weapon')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Aid')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Mass Healing Word')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Spirit Guardians')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Banishment')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Guardian of Faith')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Mass Cure Wounds')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Harm')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Resurrection')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Sunburst')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Holy Aura')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (2, (SELECT id FROM spells WHERE spell_name = 'Mass Heal')) ON CONFLICT DO NOTHING;
+-- Cleric
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Sacred Flame')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Guidance')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Toll the Dead')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Cure Wounds')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Bless')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Healing Word')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Spiritual Weapon')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Aid')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Mass Healing Word')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Spirit Guardians')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Banishment')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Guardian of Faith')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Mass Cure Wounds')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Harm')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Resurrection')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Sunburst')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Holy Aura')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Cleric'), (SELECT id FROM spells WHERE spell_name = 'Mass Heal')) ON CONFLICT DO NOTHING;
 
--- Druid (3)
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Guidance')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Shillelagh')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Thunderclap')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Cure Wounds')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Entangle')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Moonbeam')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Call Lightning')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Conjure Animals')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Dominate Beast')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Wrath of Nature')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Investiture of Flame')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Earthquake')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Foresight')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (3, (SELECT id FROM spells WHERE spell_name = 'Storm of Vengeance')) ON CONFLICT DO NOTHING;
+-- Druid
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Guidance')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Shillelagh')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Thunderclap')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Cure Wounds')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Entangle')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Moonbeam')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Call Lightning')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Conjure Animals')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Dominate Beast')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Wrath of Nature')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Investiture of Flame')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Earthquake')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Foresight')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Druid'), (SELECT id FROM spells WHERE spell_name = 'Storm of Vengeance')) ON CONFLICT DO NOTHING;
 
--- Paladin (4)
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Cure Wounds')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Bless')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Divine Smite')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Spiritual Weapon')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Aid')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Banishment')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Guardian of Faith')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Destructive Wave')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (4, (SELECT id FROM spells WHERE spell_name = 'Holy Aura')) ON CONFLICT DO NOTHING;
+-- Paladin
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Cure Wounds')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Bless')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Divine Smite')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Spiritual Weapon')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Aid')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Banishment')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Guardian of Faith')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Destructive Wave')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Paladin'), (SELECT id FROM spells WHERE spell_name = 'Holy Aura')) ON CONFLICT DO NOTHING;
 
--- Ranger (5)
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Entangle')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Hunter''s Mark')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Conjure Animals')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Scrying')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (5, (SELECT id FROM spells WHERE spell_name = 'Wrath of Nature')) ON CONFLICT DO NOTHING;
+-- Ranger
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Entangle')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Hunter''s Mark')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Conjure Animals')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Scrying')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Ranger'), (SELECT id FROM spells WHERE spell_name = 'Wrath of Nature')) ON CONFLICT DO NOTHING;
 
--- Sorcerer (6)
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Fire Bolt')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Mage Hand')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Thunderclap')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Magic Missile')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Shield')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Scorching Ray')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Fireball')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Counterspell')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Cone of Cold')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Dominate Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Chain Lightning')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Power Word Stun')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (6, (SELECT id FROM spells WHERE spell_name = 'Wish')) ON CONFLICT DO NOTHING;
+-- Sorcerer
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Fire Bolt')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Mage Hand')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Thunderclap')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Magic Missile')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Shield')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Scorching Ray')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Fireball')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Counterspell')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Cone of Cold')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Dominate Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Chain Lightning')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Power Word Stun')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Sorcerer'), (SELECT id FROM spells WHERE spell_name = 'Wish')) ON CONFLICT DO NOTHING;
 
--- Warlock (7)
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Eldritch Blast')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Toll the Dead')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Hex')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Hunger of Hadar')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Banishment')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Blight')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Scrying')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Dominate Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Finger of Death')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Etherealness')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'Power Word Stun')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (7, (SELECT id FROM spells WHERE spell_name = 'True Polymorph')) ON CONFLICT DO NOTHING;
+-- Warlock
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Eldritch Blast')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Toll the Dead')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Hex')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Hunger of Hadar')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Banishment')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Blight')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Scrying')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Dominate Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Finger of Death')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Etherealness')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'Power Word Stun')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Warlock'), (SELECT id FROM spells WHERE spell_name = 'True Polymorph')) ON CONFLICT DO NOTHING;
 
--- Wizard (8)
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Fire Bolt')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Mage Hand')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Magic Missile')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Shield')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Scorching Ray')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Fireball')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Counterspell')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Hypnotic Pattern')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Arcane Eye')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Cone of Cold')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Scrying')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Chain Lightning')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Finger of Death')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Mordenkainen''s Sword')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Power Word Stun')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'Wish')) ON CONFLICT DO NOTHING;
-INSERT INTO class_spell VALUES (8, (SELECT id FROM spells WHERE spell_name = 'True Polymorph')) ON CONFLICT DO NOTHING;
+-- Wizard
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Fire Bolt')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Mage Hand')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Prestidigitation')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Magic Missile')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Shield')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Detect Magic')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Misty Step')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Hold Person')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Scorching Ray')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Fireball')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Counterspell')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Hypnotic Pattern')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Arcane Eye')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Polymorph')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Cone of Cold')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Scrying')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Chain Lightning')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Finger of Death')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Mordenkainen''s Sword')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Power Word Stun')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'Wish')) ON CONFLICT DO NOTHING;
+INSERT INTO class_spell VALUES ((SELECT id FROM classes WHERE class_name = 'Wizard'), (SELECT id FROM spells WHERE spell_name = 'True Polymorph')) ON CONFLICT DO NOTHING;

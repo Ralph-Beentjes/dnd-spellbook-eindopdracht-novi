@@ -13,4 +13,6 @@ public interface SpellRepository extends JpaRepository<SpellEntity, Long> {
 
     List<SpellEntity> findByLevel(int level);
 
+    List<SpellEntity> findByLevelAndCharacterClasses_Id(int level, Long classId);
+
 }

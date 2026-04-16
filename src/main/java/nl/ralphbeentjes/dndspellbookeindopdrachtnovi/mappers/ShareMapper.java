@@ -13,8 +13,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {SpellbookMapper.class})
 public interface ShareMapper {
 
-    ShareMapper INSTANCE = Mappers.getMapper(ShareMapper.class);
-
     @Mapping(target = "spellbook", ignore = true)
     ShareEntity toEntity(ShareRequestDTO dto);
 
