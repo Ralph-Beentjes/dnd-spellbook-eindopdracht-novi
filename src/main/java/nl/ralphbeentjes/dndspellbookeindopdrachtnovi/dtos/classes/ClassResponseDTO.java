@@ -7,12 +7,14 @@ public class ClassResponseDTO {
     private Long id;
     private String className;
     private String description;
-
-    private List<Long> spellbookIds;
     private Set<Long> spellIds;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getClassName() {
@@ -29,14 +31,6 @@ public class ClassResponseDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Long> getSpellbookIds() {
-        return spellbookIds;
-    }
-
-    public void setSpellbookIds(List<Long> spellbookIds) {
-        this.spellbookIds = spellbookIds;
     }
 
     public Set<Long> getSpellIds() {

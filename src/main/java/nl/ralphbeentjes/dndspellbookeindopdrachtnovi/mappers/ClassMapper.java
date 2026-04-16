@@ -5,10 +5,8 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassResponseD
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = {SpellMapper.class})
 public interface ClassMapper {

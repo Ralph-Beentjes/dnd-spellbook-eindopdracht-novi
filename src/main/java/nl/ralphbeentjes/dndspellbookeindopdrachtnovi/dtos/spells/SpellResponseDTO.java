@@ -11,8 +11,6 @@ public class SpellResponseDTO {
     private Long id;
     private String spellName;
     private int level;
-    private List<SpellbookResponseDTO> spellbooks;
-    private List<ClassResponseDTO> classes;
     private CastingTime castingTime;
     private int range;
     private String components;
@@ -42,22 +40,6 @@ public class SpellResponseDTO {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public List<SpellbookResponseDTO> getSpellbooks() {
-        return spellbooks;
-    }
-
-    public void setSpellbooks(List<SpellbookResponseDTO> spellbooks) {
-        this.spellbooks = spellbooks;
-    }
-
-    public List<ClassResponseDTO> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(List<ClassResponseDTO> classes) {
-        this.classes = classes;
     }
 
     public CastingTime getCastingTime() {
