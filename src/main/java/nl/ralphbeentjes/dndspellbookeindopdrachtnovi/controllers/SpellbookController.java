@@ -55,6 +55,13 @@ public class SpellbookController {
         return ResponseEntity.ok(spellbookResponseDTO);
     }
 
+    @DeleteMapping("/{spellbookId}/spells/{spellId}")
+    public ResponseEntity<SpellbookResponseDTO> removeSpell(@PathVariable Long spellbookId, @PathVariable Long spellId) {
+        SpellbookResponseDTO spellbookResponseDTO = spellbookService.removeSpellFromSpellbook(spellbookId, spellId);
+
+        return ResponseEntity.ok(spellbookResponseDTO);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<SpellbookResponseDTO> deleteSpellbook(@PathVariable Long id) {
         spellbookService.deleteSpellbook(id);

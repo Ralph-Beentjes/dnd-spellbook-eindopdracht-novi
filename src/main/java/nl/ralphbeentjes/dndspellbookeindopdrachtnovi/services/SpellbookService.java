@@ -113,6 +113,16 @@ public class SpellbookService {
         return spellbookMapper.toResponseDTO(entity);
     }
 
+    public SpellbookResponseDTO removeSpellFromSpellbook(Long spellbookId, Long spellId) {
+        SpellbookEntity entity = spellbookRepository.findById(spellbookId)
+                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+
+        entity.getSpells().removeIf(spell -> spell.getId().equals(spellId));
+
+        entity = spellbookRepository.save(entity);
+        return spellbookMapper.toResponseDTO(entity);
+    }
+
     public void deleteSpellbook(Long id) {
         spellbookRepository.deleteById(id);
     }
