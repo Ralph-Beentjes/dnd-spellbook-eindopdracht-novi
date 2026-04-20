@@ -61,15 +61,18 @@ public class SpellService {
 
     public SpellResponseDTO createSpell(SpellRequestDTO spellRequestDTO) {
         SpellEntity spellEntity = spellMapper.toEntity(spellRequestDTO);
+        spellEntity = spellRepository.save(spellEntity);
 
         if (spellRequestDTO.getClassIds() != null) {
-            Set<ClassEntity> classes =
-                    new HashSet<>(classRepository.findAllById(spellRequestDTO.getClassIds()));
+            Set<ClassEntity> classes = new HashSet<>(classRepository.findAllById(spellRequestDTO.getClassIds()));
+            for (ClassEntity classEntity : classes) {
+                classEntity.getSpells().add(spellEntity);
+                classRepository.save(classEntity);
+            }
             spellEntity.setClasses(classes);
         }
 
-        spellEntity = spellRepository.save(spellEntity);
-        return spellMapper.toResponseDTO(spellEntity);
+        return spellMapper.toResponseDTO(spellRepository.save(spellEntity));
     }
 
     public SpellResponseDTO updateSpell(Long id, SpellRequestDTO spellRequestDTO) {
