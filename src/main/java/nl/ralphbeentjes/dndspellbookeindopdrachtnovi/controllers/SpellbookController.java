@@ -7,8 +7,10 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services.SpellbookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -66,5 +68,19 @@ public class SpellbookController {
     public ResponseEntity<SpellbookResponseDTO> deleteSpellbook(@PathVariable Long id) {
         spellbookService.deleteSpellbook(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/image")
+    public ResponseEntity<Void> uploadImage(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) throws IOException {
+
+        spellbookService.uploadImage(id, file);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/image")
+    public ResponseEntity<byte[]> downloadImage(@PathVariable Long id) {
+        return spellbookService.downloadImage(id);
     }
 }

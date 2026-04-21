@@ -33,6 +33,15 @@ public class SpellbookEntity extends BaseEntity {
     @OneToMany(mappedBy = "spellbook", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ShareEntity> shares;
 
+    @Column(name = "image", columnDefinition = "BYTEA")
+    private byte[] image;
+
+    @Column(name = "image_file_name")
+    private String imageFileName;
+
+    @Column(name = "image_content_type")
+    private String imageContentType;
+
     public UserProfileEntity getUserProfile() {
         return userProfile;
     }
@@ -79,5 +88,29 @@ public class SpellbookEntity extends BaseEntity {
 
     public void setShares(List<ShareEntity> shares) {
         this.shares = shares;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
+    }
+
+    public String getImageContentType() {
+        return imageContentType;
+    }
+
+    public void setImageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
     }
 }
