@@ -11,6 +11,9 @@ public class ShareEntity extends BaseEntity {
     @JoinColumn(name = "spellbook_id", nullable = false)
     private SpellbookEntity spellbook;
 
+    @Column(nullable = false, unique = true)
+    private String shareToken;
+
     @Column(nullable = false)
     private String createdBy;
 
@@ -23,6 +26,10 @@ public class ShareEntity extends BaseEntity {
     public void setSpellbook(SpellbookEntity spellbook) {
         this.spellbook = spellbook;
     }
+
+    public String getShareToken() { return shareToken; }
+
+    public void setShareToken(String shareToken) { this.shareToken = shareToken; }
 
     public String getCreatedBy() {
         return createdBy;
