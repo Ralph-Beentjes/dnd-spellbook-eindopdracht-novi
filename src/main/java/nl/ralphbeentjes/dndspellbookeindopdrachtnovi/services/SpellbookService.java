@@ -11,8 +11,13 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ShareRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -125,6 +130,32 @@ public class SpellbookService {
 
     public void deleteSpellbook(Long id) {
         spellbookRepository.deleteById(id);
+    }
+
+    public void uploadImage(Long id, MultipartFile file) throws IOException {
+        SpellbookEntity entity = spellbookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+
+        entity.setImage(file.getBytes());
+        entity.setImageFileName(file.getOriginalFilename());
+        entity.setImageContentType(file.getContentType());
+
+        spellbookRepository.save(entity);
+    }
+
+    public ResponseEntity<byte[]> downloadImage(Long id) {
+        SpellbookEntity entity = spellbookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+
+        if (entity.getImage() == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + entity.getImageFileName() + "\"")
+                .contentType(MediaType.parseMediaType(entity.getImageContentType()))
+                .body(entity.getImage());
     }
 
 }
