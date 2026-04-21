@@ -2,15 +2,16 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.controllers;
 
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.shares.ShareRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.shares.ShareResponseDTO;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spells.SpellResponseDTO;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services.ShareService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/shares")
@@ -27,19 +28,20 @@ public class ShareController {
         return new ResponseEntity<>(shares, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ShareResponseDTO> getShareById(Long id) {
-        ShareResponseDTO share = shareService.findShareById(id);
-        return new ResponseEntity<>(share, HttpStatus.OK);
+    @GetMapping("/{token}")
+    public ResponseEntity<SpellbookResponseDTO> getSharedSpellbook(@PathVariable String token) {
+        SpellbookResponseDTO spellbook = shareService.getSpellbookByToken(token);
+        return ResponseEntity.ok(spellbook);
     }
 
-    @PostMapping
-    public ResponseEntity<ShareResponseDTO> createShare(@RequestBody ShareRequestDTO shareRequestDTO) {
-        ShareResponseDTO shareResponseDTO = shareService.createShare(shareRequestDTO);
+    @PostMapping("/spellbooks/{spellbookId}")
+    public ResponseEntity<Map<String, String>> createShare(
+            @PathVariable Long spellbookId,
+            @AuthenticationPrincipal Jwt jwt) {
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(shareResponseDTO.getId()).toUri();
-
-        return ResponseEntity.created(location).body(shareResponseDTO);
+        String username = jwt.getSubject();
+        String token = shareService.getOrCreateShareToken(spellbookId, username);
+        return ResponseEntity.ok(Map.of("shareToken", token));
     }
 
     @PutMapping("/{id}")

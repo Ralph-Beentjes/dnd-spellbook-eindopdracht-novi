@@ -5,12 +5,15 @@ import java.time.LocalDateTime;
 public class ShareResponseDTO {
     private Long id;
     private Long spellbookId;
+    private String shareToken;
     private String createdBy;
     private LocalDateTime createdOn;
 
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) { this.id = id; }
 
     public Long getSpellbookId() {
         return spellbookId;
@@ -19,6 +22,10 @@ public class ShareResponseDTO {
     public void setSpellbookId(Long spellbookId) {
         this.spellbookId = spellbookId;
     }
+
+    public String getShareToken() { return shareToken; }
+
+    public void setShareToken(String shareToken) { this.shareToken = shareToken; }
 
     public String getCreatedBy() {
         return createdBy;
