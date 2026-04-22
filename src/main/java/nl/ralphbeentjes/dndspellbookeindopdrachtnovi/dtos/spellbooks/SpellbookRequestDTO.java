@@ -1,11 +1,5 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks;
 
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ShareEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

@@ -128,6 +128,14 @@ public class SpellbookService {
         return spellbookMapper.toResponseDTO(entity);
     }
 
+    public SpellbookResponseDTO levelUpSpellbook(Long id) {
+        SpellbookEntity entity = spellbookRepository.findByIdWithClass(id)
+                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        entity.setLevel(entity.getLevel() + 1);
+        entity = spellbookRepository.save(entity);
+        return spellbookMapper.toResponseDTO(entity);
+    }
+
     public void deleteSpellbook(Long id) {
         spellbookRepository.deleteById(id);
     }
