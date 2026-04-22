@@ -7,6 +7,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.exceptions.RecordNotFoundException;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ShareRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
@@ -50,7 +51,7 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO findSpellbookById(Long id) {
-        SpellbookEntity entity = spellbookRepository.findByIdWithClass(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        SpellbookEntity entity = spellbookRepository.findByIdWithClass(id).orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
         return spellbookMapper.toResponseDTO(entity);
     }
 
@@ -82,7 +83,7 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO updateSpellbook(Long id, SpellbookRequestDTO spellbookRequestDTO) {
-        SpellbookEntity entity = spellbookRepository.findById(id).orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        SpellbookEntity entity = spellbookRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
         entity.setSpellbookName(spellbookRequestDTO.getSpellbookName());
         entity.setLevel(spellbookRequestDTO.getLevel());
 
@@ -107,7 +108,7 @@ public class SpellbookService {
 
     public SpellbookResponseDTO addSpellsToSpellbook(Long id, AddSpellsRequestDTO request) {
         SpellbookEntity entity = spellbookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+                .orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
 
         if (request.getSpellIds() != null && !request.getSpellIds().isEmpty()) {
             Set<SpellEntity> newSpells = new HashSet<>(spellRepository.findAllById(request.getSpellIds()));
@@ -120,7 +121,7 @@ public class SpellbookService {
 
     public SpellbookResponseDTO removeSpellFromSpellbook(Long spellbookId, Long spellId) {
         SpellbookEntity entity = spellbookRepository.findById(spellbookId)
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+                .orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + spellbookId + "not found"));
 
         entity.getSpells().removeIf(spell -> spell.getId().equals(spellId));
 
@@ -130,9 +131,11 @@ public class SpellbookService {
 
     public SpellbookResponseDTO levelUpSpellbook(Long id) {
         SpellbookEntity entity = spellbookRepository.findByIdWithClass(id)
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+                .orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
+
         entity.setLevel(entity.getLevel() + 1);
         entity = spellbookRepository.save(entity);
+
         return spellbookMapper.toResponseDTO(entity);
     }
 
@@ -141,8 +144,7 @@ public class SpellbookService {
     }
 
     public void uploadImage(Long id, MultipartFile file) throws IOException {
-        SpellbookEntity entity = spellbookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        SpellbookEntity entity = spellbookRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
 
         entity.setImage(file.getBytes());
         entity.setImageFileName(file.getOriginalFilename());
@@ -152,8 +154,7 @@ public class SpellbookService {
     }
 
     public ResponseEntity<byte[]> downloadImage(Long id) {
-        SpellbookEntity entity = spellbookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        SpellbookEntity entity = spellbookRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
 
         if (entity.getImage() == null) {
             return ResponseEntity.notFound().build();

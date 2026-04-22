@@ -5,6 +5,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spells.SpellResponseDT
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.exceptions.RecordNotFoundException;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ClassRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
@@ -33,11 +34,6 @@ public class SpellService {
         return spellMapper.toResponseDTOList(spellRepository.findAll());
     }
 
-    public List<SpellResponseDTO> findAllSpellsWithContain(String spellName) {
-        List<SpellEntity> spellEntities = spellRepository.findBySpellNameContaining(spellName);
-        return spellMapper.toResponseDTOList(spellEntities);
-    }
-
     public List<SpellResponseDTO> findAllSpellsWithSpellLevel(int level) {
         List<SpellEntity> spellEntities = spellRepository.findByLevel(level);
         return spellMapper.toResponseDTOList(spellEntities);
@@ -50,12 +46,7 @@ public class SpellService {
     }
 
     public SpellResponseDTO findSpellById(Long id) {
-        SpellEntity spellEntity = spellRepository.findById(id).orElseThrow(()-> new RuntimeException("Spell not found"));
-        return spellMapper.toResponseDTO(spellEntity);
-    }
-
-    public SpellResponseDTO findSpellByName(String spellName) {
-        SpellEntity spellEntity = spellRepository.findBySpellNameIgnoreCase(spellName).orElseThrow(()-> new RuntimeException("Spell not found"));
+        SpellEntity spellEntity = spellRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("Spell with ID " + id + "not found"));
         return spellMapper.toResponseDTO(spellEntity);
     }
 
@@ -76,7 +67,7 @@ public class SpellService {
     }
 
     public SpellResponseDTO updateSpell(Long id, SpellRequestDTO spellRequestDTO) {
-        SpellEntity existingSpellEntity = spellRepository.findById(id).orElseThrow(()-> new RuntimeException("Spell not found"));
+        SpellEntity existingSpellEntity = spellRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("Spell with ID " + id + "not found"));
 
         existingSpellEntity.setSpellName(spellRequestDTO.getSpellName());
         existingSpellEntity.setLevel(spellRequestDTO.getLevel());
