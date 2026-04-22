@@ -4,11 +4,10 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassRequestDT
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.classes.ClassResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.exceptions.RecordNotFoundException;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.ClassMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ClassRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.ClassMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -32,7 +31,7 @@ public class ClassService {
     }
 
     public ClassResponseDTO findClassById(Long id) {
-        ClassEntity classEntity = classRepository.findById(id).orElseThrow(()-> new RuntimeException("Class not found"));
+        ClassEntity classEntity = classRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("Class with ID" + id + "not found"));
         return classMapper.toResponseDTO(classEntity);
     }
 
@@ -50,7 +49,7 @@ public class ClassService {
     }
 
     public ClassResponseDTO updateClass(Long id, ClassRequestDTO classRequestDTO) {
-        ClassEntity classEntity = classRepository.findById(id).orElseThrow(()-> new RuntimeException("Class not found"));
+        ClassEntity classEntity = classRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("Class with ID" + id + "not found"));
 
         classEntity.setClassName(classRequestDTO.getClassName());
         classEntity.setDescription(classRequestDTO.getDescription());

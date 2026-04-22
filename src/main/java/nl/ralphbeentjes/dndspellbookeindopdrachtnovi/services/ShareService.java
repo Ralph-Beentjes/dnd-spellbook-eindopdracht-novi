@@ -41,7 +41,7 @@ public class ShareService {
                 .map(ShareEntity::getShareToken)
                 .orElseGet(() -> {
                     SpellbookEntity spellbook = spellbookRepository.findById(spellbookId)
-                            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Spellbook not found"));
+                            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Spellbook with ID" + spellbookId + " not found"));
 
                     ShareEntity share = new ShareEntity();
                     share.setSpellbook(spellbook);

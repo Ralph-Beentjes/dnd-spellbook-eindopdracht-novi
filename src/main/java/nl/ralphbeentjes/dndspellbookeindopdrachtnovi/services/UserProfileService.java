@@ -4,6 +4,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.userprofiles.UserProfi
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.userprofiles.UserProfileResponseDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.exceptions.RecordNotFoundException;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.UserProfileMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.UserProfileRepository;
@@ -44,7 +45,7 @@ public class UserProfileService {
     }
 
     public UserProfileResponseDTO findUserProfileById(Long id) {
-        UserProfileEntity userProfileEntity = userProfileRepository.findById(id).orElseThrow(()-> new RuntimeException("Userprofile not found"));
+        UserProfileEntity userProfileEntity = userProfileRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("User profile with ID " + id + "not found"));
         return userProfileMapper.toResponseDTO(userProfileEntity);
     }
 
@@ -62,7 +63,7 @@ public class UserProfileService {
     }
 
     public UserProfileResponseDTO updateUserProfile(Long id, UserProfileRequestDTO userProfileRequestDTO) {
-        UserProfileEntity existingUserProfileEntity = userProfileRepository.findById(id).orElseThrow(()-> new RuntimeException("Userprofile not found"));
+        UserProfileEntity existingUserProfileEntity = userProfileRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("User profile with ID " + id + "not found"));
 
         if (userProfileRequestDTO.getSpellbookIds() != null) {
             Set<SpellbookEntity> spellbooks =
