@@ -37,7 +37,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/me")
-    public ResponseEntity<UserProfileResponseDTO> resolveMyProfile(@AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<UserProfileResponseDTO> createMyProfile(@AuthenticationPrincipal Jwt jwt) {
         UserProfileEntity profile = userProfileService.resolveCurrentUser(jwt);
         UserProfileResponseDTO dto = userProfileService.findUserProfileById(profile.getId());
 

@@ -61,28 +61,15 @@ public class ShareService {
         return spellbookMapper.toResponseDTO(share.getSpellbook());
     }
 
-    public ShareResponseDTO createShare(ShareRequestDTO shareRequestDTO) {
-        ShareEntity shareEntity = shareMapper.toEntity(shareRequestDTO);
-
-        SpellbookEntity spellbook = spellbookRepository.findById(shareRequestDTO.getSpellbookId())
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
-
-        shareEntity.setSpellbook(spellbook);
-
-        shareRepository.save(shareEntity);
-        return shareMapper.toResponseDTO(shareEntity);
-    }
-
     public ShareResponseDTO updateShare(Long id, ShareRequestDTO shareRequestDTO) {
-        ShareEntity shareEntity = shareMapper.toEntity(shareRequestDTO);
+        ShareEntity existingShare = shareRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Share not found"));
 
-        SpellbookEntity spellbook = spellbookRepository.findById(shareRequestDTO.getSpellbookId())
-                .orElseThrow(() -> new RuntimeException("Spellbook not found"));
+        SpellbookEntity spellbook = spellbookRepository.findById(shareRequestDTO.getSpellbookId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Spellbook not found"));
 
-        shareEntity.setSpellbook(spellbook);
+        existingShare.setCreatedBy(shareRequestDTO.getCreatedBy());
+        existingShare.setSpellbook(spellbook);
 
-        shareRepository.save(shareEntity);
-        return shareMapper.toResponseDTO(shareEntity);
+        return shareMapper.toResponseDTO(shareRepository.save(existingShare));
     }
 
     public void deleteShare(Long id) {

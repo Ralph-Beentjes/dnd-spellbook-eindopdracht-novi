@@ -35,10 +35,7 @@ public class ShareController {
     }
 
     @PostMapping("/spellbooks/{spellbookId}")
-    public ResponseEntity<Map<String, String>> createShare(
-            @PathVariable Long spellbookId,
-            @AuthenticationPrincipal Jwt jwt) {
-
+    public ResponseEntity<Map<String, String>> createShare(@PathVariable Long spellbookId, @AuthenticationPrincipal Jwt jwt) {
         String username = jwt.getSubject();
         String token = shareService.getOrCreateShareToken(spellbookId, username);
         return ResponseEntity.ok(Map.of("shareToken", token));

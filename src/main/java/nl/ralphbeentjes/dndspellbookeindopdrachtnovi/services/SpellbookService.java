@@ -117,8 +117,7 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO removeSpellFromSpellbook(Long spellbookId, Long spellId) {
-        SpellbookEntity entity = spellbookRepository.findById(spellbookId)
-                .orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + spellbookId + "not found"));
+        SpellbookEntity entity = spellbookRepository.findById(spellbookId).orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + spellbookId + "not found"));
 
         entity.getSpells().removeIf(spell -> spell.getId().equals(spellId));
 
@@ -127,8 +126,7 @@ public class SpellbookService {
     }
 
     public SpellbookResponseDTO levelUpSpellbook(Long id) {
-        SpellbookEntity entity = spellbookRepository.findByIdWithClass(id)
-                .orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
+        SpellbookEntity entity = spellbookRepository.findByIdWithClass(id).orElseThrow(() -> new RecordNotFoundException("Spellbook with ID " + id + "not found"));
 
         entity.setLevel(entity.getLevel() + 1);
         entity = spellbookRepository.save(entity);

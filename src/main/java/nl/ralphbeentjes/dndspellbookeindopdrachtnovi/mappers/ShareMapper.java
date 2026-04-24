@@ -16,6 +16,7 @@ public interface ShareMapper {
     @Mapping(target = "spellbook", ignore = true)
     ShareEntity toEntity(ShareRequestDTO dto);
 
+    @Mapping(target = "spellbookId", source = "spellbook.id")
     ShareResponseDTO toResponseDTO(ShareEntity share);
 
     List<ShareResponseDTO> toResponseDTOList(List<ShareEntity> shares);

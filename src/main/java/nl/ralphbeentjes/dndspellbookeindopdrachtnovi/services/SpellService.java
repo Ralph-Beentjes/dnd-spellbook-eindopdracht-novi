@@ -94,6 +94,14 @@ public class SpellService {
     }
 
     public void deleteSpell(Long id) {
-        spellRepository.deleteById(id);
+        SpellEntity spell = spellRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Spell with ID " + id + " not found"));
+
+        for (ClassEntity classEntity : spell.getClasses()) {
+            classEntity.getSpells().remove(spell);
+            classRepository.save(classEntity);
+        }
+        spell.getClasses().clear();
+
+        spellRepository.delete(spell);
     }
 }
