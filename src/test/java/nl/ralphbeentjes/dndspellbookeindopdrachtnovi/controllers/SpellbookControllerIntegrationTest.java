@@ -3,6 +3,7 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.controllers;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ClassRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,12 +15,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
+
 import java.net.URI;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.hamcrest.Matchers.is;
+
 
 @ActiveProfiles("test")
 @AutoConfigureMockMvc

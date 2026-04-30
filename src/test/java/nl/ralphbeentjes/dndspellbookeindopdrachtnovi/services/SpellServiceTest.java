@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -321,15 +322,44 @@ class SpellServiceTest {
     }
 
     @Test
-    void deleteSpell_shouldNotReturnSpellResponseDTO() {
+    void deleteSpell_shouldRemoveSpellFromClassesAndDelete() {
         // Arrange
         Long id = 1L;
-        doNothing().when(spellRepository).deleteById(id);
+        ClassEntity classEntity1 = new ClassEntity();
+        classEntity1.setId(5L);
+        classEntity1.setSpells(new HashSet<>(Set.of(spellEntity1)));
+
+        ClassEntity classEntity2 = new ClassEntity();
+        classEntity2.setId(6L);
+        classEntity2.setSpells(new HashSet<>(Set.of(spellEntity1)));
+
+        spellEntity1.setClasses(new HashSet<>(Set.of(classEntity1, classEntity2)));
+
+        when(spellRepository.findById(id)).thenReturn(Optional.of(spellEntity1));
 
         // Act
         spellService.deleteSpell(id);
 
         // Assert
-        verify(spellRepository, times(1)).deleteById(id);
+        assertFalse(classEntity1.getSpells().contains(spellEntity1));
+        assertFalse(classEntity2.getSpells().contains(spellEntity1));
+        assertTrue(spellEntity1.getClasses().isEmpty());
+        verify(classRepository, times(1)).save(classEntity1);
+        verify(classRepository, times(1)).save(classEntity2);
+        verify(spellRepository, times(1)).delete(spellEntity1);
+    }
+
+    @Test
+    void deleteSpell_shouldThrowRecordNotFoundExceptionWhenSpellDoesNotExist() {
+        // Arrange
+        Long id = 99L;
+
+        when(spellRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(RecordNotFoundException.class, () -> spellService.deleteSpell(id));
+        verify(spellRepository, times(1)).findById(id);
+        verify(spellRepository, never()).delete(any());
+        verifyNoInteractions(classRepository);
     }
 }
