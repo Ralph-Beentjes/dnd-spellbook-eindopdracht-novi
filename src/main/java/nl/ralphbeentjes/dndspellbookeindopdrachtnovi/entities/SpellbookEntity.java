@@ -18,7 +18,7 @@ public class SpellbookEntity extends BaseEntity {
 
     private int level;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id", nullable = false)
     private ClassEntity characterClass;
 

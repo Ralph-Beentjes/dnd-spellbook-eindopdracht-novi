@@ -9,6 +9,7 @@ import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.exceptions.RecordNotFoundException;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ClassRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ShareRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellRepository;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.SpellbookRepository;
@@ -30,17 +31,20 @@ public class SpellbookService {
     private final SpellbookMapper spellbookMapper;
     private final SpellRepository spellRepository;
     private final ShareRepository shareRepository;
+    private final ClassRepository classRepository;
 
     public SpellbookService(
             SpellbookRepository spellbookRepository,
             SpellbookMapper spellbookMapper,
             SpellRepository spellRepository,
-            ShareRepository shareRepository
+            ShareRepository shareRepository,
+            ClassRepository classRepository
     ) {
         this.spellbookRepository = spellbookRepository;
         this.spellbookMapper = spellbookMapper;
         this.spellRepository = spellRepository;
         this.shareRepository = shareRepository;
+        this.classRepository = classRepository;
     }
 
     public List<SpellbookResponseDTO> findAllSpellbooks() {
@@ -62,8 +66,7 @@ public class SpellbookService {
         }
 
         if (spellbookRequestDTO.getClassId() != null) {
-            ClassEntity classEntity = new ClassEntity();
-            classEntity.setId(spellbookRequestDTO.getClassId());
+            ClassEntity classEntity = classRepository.findById(spellbookRequestDTO.getClassId()).orElseThrow(() -> new RecordNotFoundException("Class with ID " + spellbookRequestDTO.getClassId() + " not found"));
             entity.setCharacterClass(classEntity);
         }
 
@@ -85,8 +88,7 @@ public class SpellbookService {
         entity.setLevel(spellbookRequestDTO.getLevel());
 
         if (spellbookRequestDTO.getClassId() != null) {
-            ClassEntity classEntity = new ClassEntity();
-            classEntity.setId(spellbookRequestDTO.getClassId());
+            ClassEntity classEntity = classRepository.findById(spellbookRequestDTO.getClassId()).orElseThrow(() -> new RecordNotFoundException("Class with ID " + spellbookRequestDTO.getClassId() + " not found"));
             entity.setCharacterClass(classEntity);
         }
 
