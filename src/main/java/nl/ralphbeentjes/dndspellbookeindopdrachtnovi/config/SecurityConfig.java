@@ -1,6 +1,7 @@
 package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Profile("!test")
 public class SecurityConfig {
 
     @Bean

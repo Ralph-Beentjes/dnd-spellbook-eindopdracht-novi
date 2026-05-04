@@ -84,8 +84,8 @@ class SpellbookControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.spellbookName", is("My Wizard Spellbook")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.spellbookName", is("Gandalf")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.level", is(3)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.characterClass.className", is("Gandalf")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.characterClass.className", is("Wizard")));
     }
 }
