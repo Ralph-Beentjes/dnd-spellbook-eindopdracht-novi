@@ -30,8 +30,8 @@ public class SpellbookEntity extends BaseEntity {
     )
     private Set<SpellEntity> spells = new HashSet<>();
 
-    @OneToMany(mappedBy = "spellbook", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ShareEntity> shares;
+    @OneToOne(mappedBy = "spellbook", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ShareEntity share;
 
     @Column(name = "image", columnDefinition = "BYTEA")
     private byte[] image;
@@ -82,12 +82,12 @@ public class SpellbookEntity extends BaseEntity {
         this.spells = spells;
     }
 
-    public List<ShareEntity> getShares() {
-        return shares;
+    public ShareEntity getShare() {
+        return share;
     }
 
-    public void setShares(List<ShareEntity> shares) {
-        this.shares = shares;
+    public void setShare(ShareEntity share) {
+        this.share = share;
     }
 
     public byte[] getImage() {
