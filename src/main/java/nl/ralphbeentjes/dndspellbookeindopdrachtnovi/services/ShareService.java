@@ -66,6 +66,12 @@ public class ShareService {
 
         SpellbookEntity spellbook = spellbookRepository.findById(shareRequestDTO.getSpellbookId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Spellbook not found"));
 
+        shareRepository.findBySpellbookId(shareRequestDTO.getSpellbookId()).ifPresent(existing -> {
+                    if (!existing.getId().equals(id)) {
+                        throw new ResponseStatusException(HttpStatus.CONFLICT, "Spellbook already has a share-link");
+                    }
+                });
+
         existingShare.setCreatedBy(shareRequestDTO.getCreatedBy());
         existingShare.setSpellbook(spellbook);
 
