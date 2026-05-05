@@ -15,7 +15,7 @@ public interface SpellbookMapper {
     @Mapping(target = "characterClass", ignore = true)
     @Mapping(target = "userProfile", ignore = true)
     @Mapping(target = "spells", ignore = true)
-    @Mapping(target = "shares", ignore = true)
+    @Mapping(target = "share", ignore = true)
     SpellbookEntity toEntity(SpellbookRequestDTO dto);
 
     SpellbookResponseDTO toResponseDTO(SpellbookEntity entity);
