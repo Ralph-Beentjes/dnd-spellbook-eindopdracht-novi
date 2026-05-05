@@ -3,10 +3,7 @@ package nl.ralphbeentjes.dndspellbookeindopdrachtnovi.services;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.AddSpellsRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookRequestDTO;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.dtos.spellbooks.SpellbookResponseDTO;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.ClassEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.SpellbookEntity;
-import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.UserProfileEntity;
+import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.entities.*;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.exceptions.RecordNotFoundException;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.mappers.SpellbookMapper;
 import nl.ralphbeentjes.dndspellbookeindopdrachtnovi.repositories.ClassRepository;
@@ -74,8 +71,9 @@ public class SpellbookService {
             entity.setSpells(new HashSet<>(spellRepository.findAllById(spellbookRequestDTO.getSpellIds())));
         }
 
-        if (spellbookRequestDTO.getShareIds() != null) {
-            entity.setShares(shareRepository.findAllById(spellbookRequestDTO.getShareIds()));
+        if (spellbookRequestDTO.getShareId() != null) {
+            ShareEntity share = shareRepository.findById(spellbookRequestDTO.getShareId()).orElseThrow(() -> new RecordNotFoundException("Share with ID " + spellbookRequestDTO.getShareId() + " not found"));
+            entity.setShare(share);
         }
 
         entity = spellbookRepository.save(entity);
@@ -97,8 +95,9 @@ public class SpellbookService {
             entity.getSpells().addAll(newSpells);
         }
 
-        if (spellbookRequestDTO.getShareIds() != null) {
-            entity.setShares(shareRepository.findAllById(spellbookRequestDTO.getShareIds()));
+        if (spellbookRequestDTO.getShareId() != null) {
+            ShareEntity share = shareRepository.findById(spellbookRequestDTO.getShareId()).orElseThrow(() -> new RecordNotFoundException("Share with ID " + spellbookRequestDTO.getShareId() + " not found"));
+            entity.setShare(share);
         }
 
         entity = spellbookRepository.save(entity);

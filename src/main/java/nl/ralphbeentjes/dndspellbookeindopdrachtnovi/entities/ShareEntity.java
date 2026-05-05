@@ -7,8 +7,8 @@ import java.util.Date;
 @Entity
 @Table(name = "shares")
 public class ShareEntity extends BaseEntity {
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "spellbook_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "spellbook_id", nullable = false, unique = true)
     private SpellbookEntity spellbook;
 
     @Column(nullable = false, unique = true)

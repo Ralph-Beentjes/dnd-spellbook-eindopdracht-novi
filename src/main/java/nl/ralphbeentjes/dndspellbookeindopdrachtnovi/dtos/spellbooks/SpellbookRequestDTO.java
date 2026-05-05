@@ -9,7 +9,7 @@ public class SpellbookRequestDTO {
     private int level;
     private Long classId;
     private Set<Long> spellIds;
-    private List<Long> shareIds;
+    private Long shareId;
 
     public Long getUserProfileId() {
         return userProfileId;
@@ -51,11 +51,11 @@ public class SpellbookRequestDTO {
         this.spellIds = spellIds;
     }
 
-    public List<Long> getShareIds() {
-        return shareIds;
+    public Long getShareId() {
+        return shareId;
     }
 
-    public void setShareIds(List<Long> shareIds) {
-        this.shareIds = shareIds;
+    public void setShareId(Long shareId) {
+        this.shareId = shareId;
     }
 }
